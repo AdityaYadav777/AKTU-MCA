@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "980971406116",
+    "project_id": "pdf-x-97c59",
+    "storage_bucket": "pdf-x-97c59.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980971406116:android:00627ab08c56f7ac1569b1",
+        "android_client_info": {
+          "package_name": "com.aditya.pdf_x"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnt-oU1bGyu_u2mbOTdcPBb9yY3Ul7YWs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
