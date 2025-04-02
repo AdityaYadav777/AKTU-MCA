@@ -45,67 +45,94 @@ import com.aditya.pdf_x.ViewModels.HomeViewModel
 @Composable
 fun Subjects(homeViewModel: HomeViewModel, navController: NavHostController) {
 
-val subjects=homeViewModel.subjects.collectAsStateWithLifecycle()
+    val subjects = homeViewModel.subjects.collectAsStateWithLifecycle()
 
 
     Scaffold(
 
         topBar = {
-            CenterAlignedTopAppBar(title = {
+            CenterAlignedTopAppBar(
+                title = {
 
-                Text("Subjects", fontWeight = FontWeight.ExtraBold)
+                    Text("Subjects", fontWeight = FontWeight.ExtraBold)
 
-            }, colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Black.copy(alpha = 0.7f)))
+                },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Black.copy(alpha = 0.7f))
+            )
         }
-    ) {innerPadding->
-        Column(modifier = Modifier.padding(innerPadding).fillMaxSize().background(Color.LightGray), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxSize()
+                .background(Color.LightGray),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
 
-            if (subjects.value.isEmpty()){
+            if (subjects.value.isEmpty()) {
                 CircularProgressIndicator(color = Color.Black)
-            }else
-            LazyVerticalGrid(GridCells.Fixed(2), modifier = Modifier.padding(12.dp)) {
-               items(subjects.value){data->
-                   ItemView(data,navController,homeViewModel)
-               }
+            } else
+                LazyVerticalGrid(GridCells.Fixed(2), modifier = Modifier.padding(12.dp)) {
+                    items(subjects.value) { data ->
+                        ItemView(data, navController, homeViewModel)
+                    }
 
-            }
+                }
         }
     }
-
 
 
 }
 
 
-
-
 @Composable
-fun ItemView(data:SubjectModel,navController: NavHostController,homeViewModel: HomeViewModel){
-    Card (modifier = Modifier.size(170.dp).padding(12.dp)
+fun ItemView(data: SubjectModel, navController: NavHostController, homeViewModel: HomeViewModel) {
+    Card(modifier = Modifier
+        .size(170.dp)
+        .padding(12.dp)
         .border(width = 1.dp, color = Color.Black, shape = RoundedCornerShape(7))
         .clickable {
 
 
-             homeViewModel.getAllQuestions(data.name)
-             navController.navigate(routes.AllQuestionsPapers.routes)
+            homeViewModel.getAllQuestions(data.name)
+            navController.navigate(routes.AllQuestionsPapers.routes)
 
 
         }
 
-    ){
+    ) {
 
 
-        Column (modifier = Modifier.fillMaxSize().paint(painter = painterResource(R.drawable.cardbg), contentScale = ContentScale.FillBounds).padding(12.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center){
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .paint(
+                    painter = painterResource(R.drawable.cardbg),
+                    contentScale = ContentScale.FillBounds
+                )
+                .padding(12.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
 
-            SubcomposeAsyncImage(model = data.url,
+            SubcomposeAsyncImage(
+                model = data.url,
                 loading = {
                     CircularProgressIndicator()
                 },
                 contentDescription = null,
-                modifier = Modifier.size(80.dp)
+                modifier = Modifier
+                    .size(80.dp)
                     .clip(RoundedCornerShape(50))
-                )
-            Text(data.name, fontWeight = FontWeight.ExtraBold, fontSize = 19.sp, textAlign = TextAlign.Center, color = Color.Black)
+            )
+            Text(
+                data.name,
+                fontWeight = FontWeight.ExtraBold,
+                fontSize = 19.sp,
+                textAlign = TextAlign.Center,
+                color = Color.Black
+            )
 
         }
 

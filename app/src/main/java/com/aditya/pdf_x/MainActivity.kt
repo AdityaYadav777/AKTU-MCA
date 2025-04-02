@@ -23,22 +23,27 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PdfXTheme {
-                    val HomeViewModel :HomeViewModel by viewModels()
-                    requestPermission()
-                val notificationManager=getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-                if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
-                    val notificationChannel=
-                        NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH)
+                val HomeViewModel: HomeViewModel by viewModels()
+                requestPermission()
+                val notificationManager =
+                    getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    val notificationChannel =
+                        NotificationChannel(
+                            channelId,
+                            channelName,
+                            NotificationManager.IMPORTANCE_HIGH
+                        )
                     notificationManager.createNotificationChannel(notificationChannel)
                 }
 
-                   Navigation(HomeViewModel)
+                Navigation(HomeViewModel)
             }
         }
     }
 
 
-    fun requestPermission(){
+    fun requestPermission() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             ActivityCompat.requestPermissions(
@@ -47,8 +52,6 @@ class MainActivity : ComponentActivity() {
                 100
             )
         }
-
     }
-
 }
 

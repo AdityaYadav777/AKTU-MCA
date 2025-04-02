@@ -15,8 +15,8 @@ android {
         applicationId = "com.aditya.pdf_x"
         minSdk = 24
         targetSdk = 34
-        versionCode = 2
-        versionName = "1"
+        versionCode = 3
+        versionName = "1.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -62,16 +62,21 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
     implementation("com.google.dagger:hilt-android:2.51.1")
     kapt("com.google.dagger:hilt-android-compiler:2.51.1")
-    implementation ("io.github.grizzi91:bouquet:1.1.2")
+
+ //   implementation("io.github.grizzi91:bouquet:1.1.2")
+
+
     implementation("io.coil-kt.coil3:coil-compose:3.0.4")
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.0.4")
 
 
     implementation("io.github.afreakyelf:Pdf-Viewer:2.1.1")
+    implementation("com.google.accompanist:accompanist-pager:0.22.0-rc")
 
-    implementation ("com.google.accompanist:accompanist-pager:0.22.0-rc")
+    implementation("com.google.ai.client.generativeai:generativeai:0.7.0")
 
 
 }

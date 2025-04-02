@@ -7,7 +7,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -43,52 +42,71 @@ import com.aditya.pdf_x.ViewModels.HomeViewModel
 fun AllQuestionsPapers(HomeViewModel: HomeViewModel, navController: NavHostController) {
 
 
-    val questions=HomeViewModel.allQuestions.collectAsStateWithLifecycle()
+    val questions = HomeViewModel.allQuestions.collectAsStateWithLifecycle()
 
 
     Scaffold(
-        topBar = { CenterAlignedTopAppBar(title = { Text("All Question Papers", fontWeight = FontWeight.ExtraBold) }, colors = TopAppBarDefaults.topAppBarColors(
-            Color.Black.copy(alpha = 0.7f))) }
-    ) {innerPadding->
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = { Text("All Question Papers", fontWeight = FontWeight.ExtraBold) },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    Color.Black.copy(alpha = 0.7f)
+                )
+            )
+        }
+    ) { innerPadding ->
 
 
-      if (questions.value.isEmpty()){
-          Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
-              CircularProgressIndicator()
-          }
-      }else
-      LazyColumn (modifier = Modifier.padding(innerPadding).padding(top = 10.dp)   .background(Color.LightGray)
+        if (questions.value.isEmpty()) {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                CircularProgressIndicator()
+            }
+        } else
+            LazyColumn(
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .padding(top = 10.dp)
+                    .background(Color.LightGray)
 
-          .fillMaxSize()){
-          items(questions.value){
-              itemView(it,navController)
-          }
-      }
+                    .fillMaxSize()
+            ) {
+                items(questions.value) {
+                    itemView(it, navController)
+                }
+            }
     }
 }
-
 
 
 @Composable
 fun itemView(allQuestionModel: AllQuestionModel, navController: NavHostController) {
 
-  Row(modifier = Modifier.fillMaxWidth()
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
 
-      .padding(8.dp) .border(width = 1.dp, color = Color.Blue, shape = RoundedCornerShape(20)).height(70.dp).
-  clickable {
-      Utils.url=allQuestionModel.url
-      navController.navigate(routes.PdfViewer.routes )
-  }.padding(16.dp)
+            .padding(8.dp)
+            .border(width = 1.dp, color = Color.Black, shape = RoundedCornerShape(20))
+            .height(70.dp)
+            .clickable {
+                Utils.url = allQuestionModel.url
+                navController.navigate(routes.PdfViewer.routes)
+            }
+            .padding(16.dp)
 
-  ) {
+    ) {
 
-        Image(painter = painterResource(R.drawable.pdf), contentDescription = null,)
+        Image(painter = painterResource(R.drawable.pdf), contentDescription = null)
 
         Spacer(Modifier.width(20.dp))
 
-        Text(allQuestionModel.name, color = Color.Black, modifier = Modifier.align(Alignment.CenterVertically))
+        Text(
+            allQuestionModel.name,
+            color = Color.Black,
+            modifier = Modifier.align(Alignment.CenterVertically)
+        )
 
-  }
+    }
 
 }
 

@@ -16,33 +16,33 @@ import com.aditya.pdf_x.ViewModels.HomeViewModel
 @Composable
 fun Navigation(HomeViewModel: HomeViewModel) {
 
-    val navController= rememberNavController()
-    NavHost(navController, startDestination = routes.Splash.routes,
+    val navController = rememberNavController()
+    NavHost(
+        navController, startDestination = routes.Splash.routes,
 
-    //    enterTransition = { slideInHorizontally(animationSpec = tween(300))}, exitTransition = { slideOutVertically  (animationSpec = tween(1000)) }
+        //    enterTransition = { slideInHorizontally(animationSpec = tween(300))}, exitTransition = { slideOutVertically  (animationSpec = tween(1000)) }
 
     ) {
-        composable(routes.Splash.routes){
+        composable(routes.Splash.routes) {
             Splash(navController)
         }
 
-        composable(routes.Home.routes){
-            Home(HomeViewModel,navController)
+        composable(routes.Home.routes) {
+            Home(HomeViewModel, navController)
         }
 
-        composable(routes.Subjects.routes){
-            Subjects(HomeViewModel,navController)
+        composable(routes.Subjects.routes) {
+            Subjects(HomeViewModel, navController)
         }
 
-        composable(routes.PdfViewer.routes){
-           PdfViewer()
+        composable(routes.PdfViewer.routes) {
+            PdfViewer(HomeViewModel)
         }
-        composable(routes.AllQuestionsPapers.routes){
-            AllQuestionsPapers(HomeViewModel,navController)
+        composable(routes.AllQuestionsPapers.routes) {
+            AllQuestionsPapers(HomeViewModel, navController)
         }
 
     }
-
 
 
 }
