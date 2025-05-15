@@ -117,7 +117,8 @@ fun ItemView(data: SubjectModel, navController: NavHostController, homeViewModel
         ) {
 
             SubcomposeAsyncImage(
-                model = data.url,
+                model = data.url,//dfg
+
                 loading = {
                     CircularProgressIndicator()
                 },
@@ -139,3 +140,4 @@ fun ItemView(data: SubjectModel, navController: NavHostController, homeViewModel
 
     }
 }
+

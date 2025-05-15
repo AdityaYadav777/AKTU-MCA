@@ -28,10 +28,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.aditya.pdf_x.R
 import com.aditya.pdf_x.ViewModels.HomeViewModel
 
 
@@ -44,18 +46,10 @@ fun Home(homeViewModel: HomeViewModel, navController: NavHostController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(
-                        Color.White.copy(alpha = 0.2f),
-                        Color.White.copy(alpha = 0.2f),
-                        Color.Blue.copy(alpha = 0.7f)
-                    )
-                )
-            )
+            .background(colorResource(R.color.darkBlue))
     ) {
         // 🌀 Add a wave animation layer
-        WaveBackground()
+
 
         Column(
             modifier = Modifier.fillMaxSize(),
