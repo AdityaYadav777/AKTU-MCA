@@ -46,8 +46,7 @@ fun ImageSliders(HomeViewModel: HomeViewModel, navController: NavHostController)
             .fillMaxWidth()
             .height(250.dp)
             .padding(top = 30.dp, start = 12.dp, end = 12.dp)
-            .border(width = 1.dp, color = Color.Black, shape = RoundedCornerShape(10))
-      ,
+            .border(width = 1.dp, color = Color.Black, shape = RoundedCornerShape(10)),
         verticalAlignment = Alignment.CenterVertically
 
     ) { page ->
@@ -55,10 +54,19 @@ fun ImageSliders(HomeViewModel: HomeViewModel, navController: NavHostController)
         SubcomposeAsyncImage(modifier = Modifier
             .clip(shape = RoundedCornerShape(10))
             .clickable {
-                Utils.url=slider.value[page].url
+                Utils.url = slider.value[page].url
                 navController.navigate(routes.PdfViewer.routes)
             },
-            model = slider.value[page].img, loading = { Box(modifier = Modifier.fillMaxSize(),contentAlignment = Alignment.Center) {CircularProgressIndicator()   } }, contentDescription = null, contentScale = ContentScale.FillBounds)
+            model = slider.value[page].img,
+            loading = {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) { CircularProgressIndicator() }
+            },
+            contentDescription = null,
+            contentScale = ContentScale.FillBounds
+        )
 
 
     }
