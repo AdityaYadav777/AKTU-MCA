@@ -12,10 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.LinearProgressIndicator
-import androidx.compose.material3.ProgressIndicatorDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -52,7 +49,7 @@ fun Splash(navController: NavHostController) {
 
 
         LaunchedEffect(true) {
-            delay(3000)
+            delay(3500)
             navController.navigate(routes.Home.routes) {
                 popUpTo(routes.Splash.routes) {
                     inclusive = true
@@ -60,8 +57,9 @@ fun Splash(navController: NavHostController) {
             }
         }
 
- Image(painter = painterResource(R.drawable.logo),null, modifier = Modifier.size(130.dp))
-        Spacer(Modifier.height(30.dp))
+ Image(painter = painterResource(R.drawable.spalsh),null, modifier = Modifier.size(220.dp)
+ )
+        Spacer(Modifier.height(10.dp))
  LinearDeterminateIndicator()
 
     }
@@ -72,11 +70,10 @@ fun Splash(navController: NavHostController) {
 @Composable
 fun LinearDeterminateIndicator() {
     var currentProgress by remember { mutableStateOf(0f) }
-    var loading by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope() // Create a coroutine scope
 
     Column(
-        verticalArrangement = Arrangement.spacedBy(12.dp),
+        verticalArrangement = Arrangement.spacedBy(2.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -93,8 +90,6 @@ fun LinearDeterminateIndicator() {
         }
 
 
-
-
             LinearProgressIndicator(
 
                 progress = { currentProgress },
@@ -109,15 +104,13 @@ fun LinearDeterminateIndicator() {
     }
 
 
-/** Iterate the progress value */
+
 suspend fun loadProgress(updateProgress: (Float) -> Unit) {
     for (i in 1..100) {
         updateProgress(i.toFloat() / 100)
         delay(24)
         if (i==50){
-
             delay(1000)
-
         }
 
     }

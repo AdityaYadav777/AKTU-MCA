@@ -22,6 +22,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled=false
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -55,6 +58,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.messaging)
+    implementation(libs.androidx.navigation.runtime.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -63,19 +67,23 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    //dagger hilt
     implementation("com.google.dagger:hilt-android:2.51.1")
     kapt("com.google.dagger:hilt-android-compiler:2.51.1")
 
- //   implementation("io.github.grizzi91:bouquet:1.1.2")
 
 
+    //coil
     implementation("io.coil-kt.coil3:coil-compose:3.0.4")
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.0.4")
 
 
+    //pdf-viewer
     implementation("io.github.afreakyelf:Pdf-Viewer:2.1.1")
+    //pager
     implementation("com.google.accompanist:accompanist-pager:0.22.0-rc")
 
+    //google-generativeai
     implementation("com.google.ai.client.generativeai:generativeai:0.7.0")
 
 

@@ -7,5 +7,7 @@ sealed class routes(val routes: String) {
     object Subjects : routes("Subjects")
     object PdfViewer : routes("PdfViewer")
     object AllQuestionsPapers : routes("AllQuestionsPapers")
+    object TopHeadLineCollection : routes("TopHeadLineCollection")
+    object AllNotes:routes("AllNotes")
 
 }

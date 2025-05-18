@@ -118,7 +118,7 @@ fun myPdf2(url: String, HomeViewModel: HomeViewModel) {
             contentAlignment = Alignment.Center
         ) {
 
-            CircularProgressIndicator()
+        LoadingScreen()
 
             PdfRendererViewCompose(
                 url = url,

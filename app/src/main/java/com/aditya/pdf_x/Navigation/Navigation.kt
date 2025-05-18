@@ -5,11 +5,13 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.aditya.pdf_x.Screens.AllNotes
 import com.aditya.pdf_x.Screens.AllQuestionsPapers
 import com.aditya.pdf_x.Screens.Home
 import com.aditya.pdf_x.Screens.PdfViewer
 import com.aditya.pdf_x.Screens.Splash
 import com.aditya.pdf_x.Screens.Subjects
+import com.aditya.pdf_x.Screens.TopHeadLineCollection
 import com.aditya.pdf_x.ViewModels.HomeViewModel
 
 
@@ -40,6 +42,15 @@ fun Navigation(HomeViewModel: HomeViewModel) {
         }
         composable(routes.AllQuestionsPapers.routes) {
             AllQuestionsPapers(HomeViewModel, navController)
+        }
+
+        composable(routes.TopHeadLineCollection.routes + "/{data}"){
+           val data=it.arguments?.getString("data")?:""
+            TopHeadLineCollection(HomeViewModel,navController, data)
+        }
+
+        composable(routes.AllNotes.routes){
+            AllNotes(HomeViewModel,navController)
         }
 
     }

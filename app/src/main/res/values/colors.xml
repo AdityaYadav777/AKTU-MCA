@@ -8,4 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="darkBlue">#161E31</color>
+    <color name="lightblue">#2D3250B2</color>
+    <color name="borderYellow">#F8B179</color>
+    <color name="sembg">#2D3250</color>
+    <color name="boxColor">#3E435E</color>
+    <color name="subjectTitleColor">#3E435E80</color>
 </resources>

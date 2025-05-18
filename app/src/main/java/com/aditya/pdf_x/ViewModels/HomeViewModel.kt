@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aditya.pdf_x.Models.AllQuestionModel
+import com.aditya.pdf_x.Models.HeadLineCollection
+import com.aditya.pdf_x.Models.NoteModel
 import com.aditya.pdf_x.Models.SemesterModel
 import com.aditya.pdf_x.Models.SliderModel
 import com.aditya.pdf_x.Models.SubjectModel
@@ -40,6 +42,12 @@ class HomeViewModel @Inject constructor(val db: FirebaseFirestore, val ai: Gener
 
     var isLoading = MutableStateFlow<Boolean>(false)
 
+    val _headlineCollection= MutableStateFlow<List<HeadLineCollection>>(emptyList())
+    val headLineCollection=_headlineCollection.asStateFlow()
+
+    private val _getNotes=MutableStateFlow<List<NoteModel>>(emptyList())
+    val getNote=_getNotes.asStateFlow()
+
 
     init {
         getAllSemester()
@@ -48,7 +56,7 @@ class HomeViewModel @Inject constructor(val db: FirebaseFirestore, val ai: Gener
     }
 
 
-    suspend fun getAiResponse(message: String) {
+    fun getAiResponse(message: String) {
 
         isLoading.value = true
         viewModelScope.launch {
@@ -66,11 +74,7 @@ class HomeViewModel @Inject constructor(val db: FirebaseFirestore, val ai: Gener
             } finally {
                 isLoading.value = false
             }
-
-
         }
-
-
     }
 
 
@@ -102,7 +106,20 @@ class HomeViewModel @Inject constructor(val db: FirebaseFirestore, val ai: Gener
                 .addSnapshotListener { value, error ->
                     val data = value?.toObjects(AllQuestionModel::class.java)
                     _allQuestions.value = data!!
+                }
+        }
+    }
 
+
+    fun getAllNotes(name: String) {
+        viewModelScope.launch {
+            db.collection("MCA Semesters").document(Utils.sememsterName!!)
+                .collection(Utils.sememsterName!!).document(name).collection("Notes")
+                .addSnapshotListener { value, error ->
+                    val data = value?.toObjects(NoteModel::class.java)
+                    data?.let {
+                        _getNotes.value=it
+                    }
                 }
         }
     }
@@ -118,10 +135,23 @@ class HomeViewModel @Inject constructor(val db: FirebaseFirestore, val ai: Gener
     }
 
 
+
+
+    fun getHeadlineCollection(collection:String) {
+        _headlineCollection.value= emptyList()
+        viewModelScope.launch {
+            db.collection(collection).addSnapshotListener { value, error ->
+                val data = value?.toObjects(HeadLineCollection::class.java)
+                _headlineCollection.value=data!!
+            }
+        }
+    }
+
+
+
     override fun onCleared() {
         super.onCleared()
         db.clearPersistence()
-
     }
 
 
